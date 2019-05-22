@@ -19,3 +19,4 @@ artifacts/
 .build
 TestResult.xml
 .vs/
+/.idea
