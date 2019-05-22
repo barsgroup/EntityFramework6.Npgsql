@@ -5,12 +5,14 @@
     <AssemblyName>Z.EntityFramework.Classic.Npgsql</AssemblyName>
     <RootNamespace>Npgsql</RootNamespace>
     <Version>7.1.5</Version>
-    <Authors>ZZZ Projects</Authors>
+    <Authors>Bars Group</Authors>
     <Description>PostgreSQL provider for Entity Framework Classic</Description>
-    <Copyright>Copyright ZZZ Projects</Copyright>
+    <Copyright>Bars Group</Copyright>
     <AssemblyVersion>7.0.0.0</AssemblyVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\..\Key.snk</AssemblyOriginatorKeyFile>
+    <Company>Bars Group</Company>
+    <PackageId>Z.EntityFramework.Classic.Npgsql.BarsBI</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
