@@ -426,9 +426,9 @@ namespace Npgsql
 
             sql.Append(GetSchemaNameFromFullTableName(renameIndexOperation.Table));
             sql.Append(".\"");
-            sql.Append(renameIndexOperation.Name);
+            sql.Append(GetTableNameFromFullTableName(renameIndexOperation.Table) + "_" + renameIndexOperation.Name);
             sql.Append("\" RENAME TO \"");
-            sql.Append(renameIndexOperation.NewName);
+            sql.Append(GetTableNameFromFullTableName(renameIndexOperation.Table) + "_" + renameIndexOperation.NewName);
             sql.Append('"');
             AddStatment(sql);
         }
@@ -573,6 +573,14 @@ namespace Npgsql
                     //TODO: Add support for setting "SERIAL"
                     break;
                 }
+            }
+            else if (column.IsNullable != null
+                      && !column.IsNullable.Value
+                      && (column.StoreType == null ||
+                          (column.StoreType.IndexOf("rowversion", StringComparison.OrdinalIgnoreCase) == -1)))
+            {
+                sql.Append(" DEFAULT ");
+                AppendValue(column.ClrDefaultValue, sql);
             }
         }
 

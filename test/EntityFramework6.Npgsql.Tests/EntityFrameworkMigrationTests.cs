@@ -151,13 +151,13 @@ namespace EntityFramework6.Npgsql.Tests
                                     expectedColumns.Remove((string)reader[0]);
                                     Assert.AreEqual("integer", (string)reader[1]);
                                     Assert.AreEqual("NO", (string)reader[2]);
-                                    Assert.That(string.IsNullOrEmpty(reader[3] as string));
+                                    Assert.AreEqual("0", (string)reader[3]);
                                     break;
                                 case "UniqueId":
                                     expectedColumns.Remove((string)reader[0]);
                                     Assert.AreEqual("uuid", (string)reader[1]);
                                     Assert.AreEqual("NO", (string)reader[2]);
-                                    Assert.That(string.IsNullOrEmpty(reader[3] as string));
+                                    Assert.AreEqual("'00000000-0000-0000-0000-000000000000'::uuid", reader[3] as string);
                                     //Assert.AreEqual("uuid_generate_v4()", reader[3] as string);
                                     break;
                                 case "Rating":
@@ -487,11 +487,11 @@ namespace EntityFramework6.Npgsql.Tests
             Assert.AreEqual(1, statements.Count());
             if (_backendVersion.Major > 9 || (_backendVersion.Major == 9 && _backendVersion.Minor >= 2))
             {
-                Assert.AreEqual("ALTER INDEX IF EXISTS someSchema.\"someOldIndexName\" RENAME TO \"someNewIndexName\"", statements.ElementAt(0).Sql);
+                Assert.AreEqual("ALTER INDEX IF EXISTS someSchema.\"someTable_someOldIndexName\" RENAME TO \"someTable_someNewIndexName\"", statements.ElementAt(0).Sql);
             }
             else
             {
-                Assert.AreEqual("ALTER INDEX someSchema.\"someOldIndexName\" RENAME TO \"someNewIndexName\"", statements.ElementAt(0).Sql);    
+                Assert.AreEqual("ALTER INDEX someSchema.\"someTable_someOldIndexName\" RENAME TO \"someTable_someNewIndexName\"", statements.ElementAt(0).Sql);     
             }
         }
 
